@@ -1,0 +1,20 @@
+{
+  "$schema": "tsschema://src/types/index#WebAppConfiguration",
+  "routing": {
+    "static": {
+      "enabled": true
+    }
+  },
+  "session": {
+    "cookie": {
+      "httpOnly": true
+    },
+    "resave": false,
+    "saveUninitialized": false,
+    "store": {
+      "schemas": {
+        "self": "servicename:${name}"
+      }
+    }
+  }
+}

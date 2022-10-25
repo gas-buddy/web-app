@@ -1,0 +1,6 @@
+{
+  "$schema": "tsschema://src/types/index#WebAppConfiguration",
+  "routing": {
+    "openapi": false
+  }
+}
