@@ -1,6 +1,7 @@
 {
   "$schema": "tsschema://src/types/index#WebAppConfiguration",
   "routing": {
+    "cookieParser": true,
     "static": {
       "enabled": true
     }

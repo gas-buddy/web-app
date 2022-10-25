@@ -1,15 +1,19 @@
 import path from 'path';
 import Redis from 'ioredis';
-import type { RequestHandler } from 'express';
 import { Service } from '@gasbuddy/service';
-import createRedisMiddleware, { sessionWasFetchedOrSaved } from '@gasbuddy/redis-session';
-import type { WebAppRequestLocals, WebAppServiceLocals } from './index';
+import createRedisMiddleware, { RedisSessionOptions, sessionWasFetchedOrSaved } from '@gasbuddy/redis-session';
+import type { RequestHandler } from 'express';
+import { validateCsrf } from './csrf';
+
+import type { CsrfConfiguration, WebAppRequestLocals, WebAppServiceLocals } from './types';
 
 export function useWebApp<
   SLocals extends WebAppServiceLocals = WebAppServiceLocals,
   RLocals extends WebAppRequestLocals = WebAppRequestLocals,
 >(baseService?: Service<SLocals, RLocals>): Service<SLocals, RLocals> {
   let sessionMiddleware: RequestHandler | undefined;
+  let csrf: CsrfConfiguration;
+
   return {
     ...baseService,
     configure(startOptions, options) {
@@ -35,15 +39,21 @@ export function useWebApp<
     async start(app) {
       await baseService?.start(app);
 
+      const sessionConfig = app.locals.config.get('session') as RedisSessionOptions;
       const redis = new Redis(app.locals.config.get('redis'));
       sessionMiddleware = createRedisMiddleware({
-        ...app.locals.config.get('session'),
+        ...sessionConfig,
         store: {
-          ...app.locals.config.get('session:store'),
+          ...sessionConfig.store,
           redis,
         },
       });
       app.locals.redis = redis;
+      csrf = app.locals.config.get('security:csrf');
+      if (!csrf?.cookie?.domain && sessionConfig.cookie?.domain) {
+        csrf.cookie = csrf.cookie || {};
+        csrf.cookie.domain = sessionConfig.cookie.domain;
+      }
     },
     async stop(app) {
       await baseService?.stop?.(app);
@@ -63,9 +73,17 @@ export function useWebApp<
         throw error as Error;
       }
       if (res.locals && req.session) {
+        // Copy this over to locals just to make Typescript a little cleaner
         res.locals.session = req.session;
       }
+
       return baseService?.onRequest?.(req, res);
+    },
+    authorize(req, res) {
+      if (csrf?.action === 'warn' || csrf?.action === 'block') {
+        validateCsrf(csrf, req, res);
+      }
+      return baseService?.authorize?.(req, res) || true;
     },
   };
 }

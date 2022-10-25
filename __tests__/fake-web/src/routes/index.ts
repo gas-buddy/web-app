@@ -15,4 +15,8 @@ export default function route(router: WebAppRouter<FakeSession>) {
   router.get('/fetch', (req, res) => {
     res.json({ hello: res.locals.session.helloWorld });
   });
+
+  router.post('/post', (req, res) => {
+    res.sendStatus(204);
+  });
 }
