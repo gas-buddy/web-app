@@ -7,6 +7,10 @@ import { validateCsrf } from './csrf';
 
 import type { CsrfConfiguration, WebAppRequestLocals, WebAppServiceLocals } from './types';
 
+function remove(array: string[] | undefined, target: string) {
+  return array?.filter((v) => v !== target) || [];
+}
+
 export function useWebApp<
   SLocals extends WebAppServiceLocals = WebAppServiceLocals,
   RLocals extends WebAppRequestLocals = WebAppRequestLocals,
@@ -21,12 +25,13 @@ export function useWebApp<
       // The expectation is that you pass in directories such that any values in the first
       // get overridden if the same value is in a subsequent entry. So that means our
       // gb-services defaults need to go "before" any existing
+      const projectConfig = path.resolve(startOptions.rootDirectory, 'config');
+      const baseWithoutProject = remove(baseConfig?.configurationDirectories, projectConfig);
       const configurationDirectories = [
-        ...(baseConfig?.configurationDirectories ?? []),
+        ...baseWithoutProject,
         path.resolve(__dirname, '../config'),
         ...(options.configurationDirectories ?? []),
       ];
-      const projectConfig = path.resolve(startOptions.rootDirectory, 'config');
       if (!configurationDirectories.includes(projectConfig)) {
         configurationDirectories.push(projectConfig);
       }
