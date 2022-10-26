@@ -1,15 +1,11 @@
 import path from 'path';
 import Redis from 'ioredis';
-import { Service } from '@gasbuddy/service';
+import { insertConfigurationBefore, Service } from '@gasbuddy/service';
 import createRedisMiddleware, { RedisSessionOptions, sessionWasFetchedOrSaved } from '@gasbuddy/redis-session';
 import type { RequestHandler } from 'express';
 import { validateCsrf } from './csrf';
 
 import type { CsrfConfiguration, WebAppRequestLocals, WebAppServiceLocals } from './types';
-
-function remove(array: string[] | undefined, target: string) {
-  return array?.filter((v) => v !== target) || [];
-}
 
 export function useWebApp<
   SLocals extends WebAppServiceLocals = WebAppServiceLocals,
@@ -21,20 +17,15 @@ export function useWebApp<
   return {
     ...baseService,
     configure(startOptions, options) {
-      const baseConfig = baseService?.configure?.(startOptions, options);
       // The expectation is that you pass in directories such that any values in the first
       // get overridden if the same value is in a subsequent entry. So that means our
       // gb-services defaults need to go "before" any existing
-      const projectConfig = path.resolve(startOptions.rootDirectory, 'config');
-      const baseWithoutProject = remove(baseConfig?.configurationDirectories, projectConfig);
-      const configurationDirectories = [
-        ...baseWithoutProject,
+      const baseConfig = baseService?.configure?.(startOptions, options);
+      const configurationDirectories = insertConfigurationBefore(
+        baseConfig?.configurationDirectories,
         path.resolve(__dirname, '../config'),
-        ...(options.configurationDirectories ?? []),
-      ];
-      if (!configurationDirectories.includes(projectConfig)) {
-        configurationDirectories.push(projectConfig);
-      }
+        path.resolve(startOptions.rootDirectory, 'config'),
+      );
 
       return {
         ...baseConfig,

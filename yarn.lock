@@ -1283,9 +1283,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gasbuddy/service@npm:^12.10.0":
-  version: 12.10.0
-  resolution: "@gasbuddy/service@npm:12.10.0"
+"@gasbuddy/service@npm:^12.12.4":
+  version: 12.12.4
+  resolution: "@gasbuddy/service@npm:12.12.4"
   dependencies:
     "@gasbuddy/kms-crypto": ^5.1.2
     "@godaddy/terminus": ^4.11.2
@@ -1324,7 +1324,7 @@ __metadata:
     shortstop-yaml: ^1.0.0
   bin:
     start-service: build/bin/start-service.js
-  checksum: e0547de255769b943fb317e4147dd98aeea76fdbc9d321c0ff9230ee52560a78d31aea18fcae766d18cc72459cad45564363724713551f4cb9b77ba5169e02bd
+  checksum: b1a17202d0c49c319fdab534ce76d22d54157b60431abfcd1267ac05d2778fc5653db1be7a9e16b25d73f8842662cd5aa31c2323268d60cde66dbc116fa80bf8
   languageName: node
   linkType: hard
 
@@ -1333,7 +1333,7 @@ __metadata:
   resolution: "@gasbuddy/web-app@workspace:."
   dependencies:
     "@gasbuddy/redis-session": ^3.0.3
-    "@gasbuddy/service": ^12.10.0
+    "@gasbuddy/service": ^12.12.4
     "@gasbuddy/service-tester": ^12.0.2
     "@types/express-session": ^1.17.5
     "@types/jest": ^29.2.0

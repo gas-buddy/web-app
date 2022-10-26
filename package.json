@@ -1,6 +1,6 @@
 {
   "name": "@gasbuddy/web-app",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "A specialized @gasbuddy/service meant to run isomorphic React apps with Redis sessions",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@gasbuddy/redis-session": "^3.0.3",
-    "@gasbuddy/service": "^12.10.0",
+    "@gasbuddy/service": "^12.12.4",
     "express-session": "^1.17.3",
     "ioredis": "^5.2.3"
   },
