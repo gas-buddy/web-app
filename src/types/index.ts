@@ -2,9 +2,7 @@ import type {
   RequestLocals,
   ServiceConfiguration,
   ServiceLocals,
-  ServiceRouter,
 } from '@gasbuddy/service';
-import type { Session } from 'express-session';
 import type { CookieOptions } from 'express-serve-static-core';
 import type { RedisSessionOptions } from '@gasbuddy/redis-session';
 import type { Redis, RedisOptions } from 'ioredis';
@@ -13,9 +11,7 @@ export interface WebAppServiceLocals extends ServiceLocals {
   redis: Redis;
 }
 
-export interface WebAppRequestLocals<SessionType extends Session = Session> extends RequestLocals {
-  // It's cleaner to put this here
-  session: SessionType;
+export interface WebAppRequestLocals extends RequestLocals {
 }
 
 export interface CsrfConfiguration {
@@ -35,9 +31,3 @@ export interface WebAppConfiguration extends ServiceConfiguration {
     csrf?: CsrfConfiguration;
   },
 }
-
-export type WebAppRouter<
-  SessionType extends Session = Session,
-  SLocals extends WebAppServiceLocals = WebAppServiceLocals,
-  RLocals extends WebAppRequestLocals = WebAppRequestLocals<SessionType>,
-> = ServiceRouter<SLocals, RLocals>;

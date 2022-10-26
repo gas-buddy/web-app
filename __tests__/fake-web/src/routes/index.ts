@@ -1,19 +1,20 @@
-import type { Session } from 'express-session';
-import type { WebAppRouter } from '../../../../src/index';
+import { ServiceRouter } from '@gasbuddy/service';
 
-interface FakeSession extends Session {
-  helloWorld?: string;
+declare module 'express-session' {
+  interface SessionData {
+    helloWorld?: string;
+  }
 }
 
-export default function route(router: WebAppRouter<FakeSession>) {
+export default function route(router: ServiceRouter) {
   router.get('/test', async (req, res) => {
-    res.locals.session.helloWorld = req.query.value as string;
-    await new Promise((accept) => { res.locals.session.save(accept); });
+    req.session.helloWorld = req.query.value as string;
+    await new Promise((accept) => { req.session.save(accept); });
     res.json({ saved: true });
   });
 
   router.get('/fetch', (req, res) => {
-    res.json({ hello: res.locals.session.helloWorld });
+    res.json({ hello: req.session.helloWorld });
   });
 
   router.post('/post', (req, res) => {

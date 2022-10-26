@@ -68,11 +68,6 @@ export function useWebApp<
       if (error) {
         throw error as Error;
       }
-      if (res.locals && req.session) {
-        // Copy this over to locals just to make Typescript a little cleaner
-        res.locals.session = req.session;
-      }
-
       return baseService?.onRequest?.(req, res);
     },
     authorize(req, res) {
