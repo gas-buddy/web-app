@@ -46,7 +46,7 @@ export function useWebApp<
       });
       app.locals.redis = redis;
       csrf = app.locals.config.get('security:csrf');
-      if (!csrf?.cookie?.domain && sessionConfig.cookie?.domain) {
+      if (csrf && !csrf?.cookie?.domain && sessionConfig.cookie?.domain) {
         csrf.cookie = csrf.cookie || {};
         csrf.cookie.domain = sessionConfig.cookie.domain;
       }
