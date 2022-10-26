@@ -5,6 +5,8 @@ import { useWebApp } from '../src/webapp';
 // eslint-disable-next-line global-require
 jest.mock('ioredis', () => require('ioredis-mock'));
 
+const TIMEOUT = 500;
+
 test('Webs should serv', async () => {
   const app = await getReusableApp({
     service: useWebApp,
@@ -14,13 +16,13 @@ test('Webs should serv', async () => {
   });
 
   expect(app).toBeTruthy();
-  await request(app).get('/index.html').expect(200).timeout(250);
-  await request(app).get('/non.html').expect(404).timeout(250);
+  await request(app).get('/index.html').expect(200).timeout(TIMEOUT);
+  await request(app).get('/non.html').expect(404).timeout(TIMEOUT);
   // No CSRF
-  await request(app).post('/post').expect(400).timeout(250);
+  await request(app).post('/post').expect(400).timeout(TIMEOUT);
 
   const agent = request.agent(app);
-  agent.timeout(250);
+  agent.timeout(TIMEOUT);
   await agent.get('/test?value=abc123').expect(200, { saved: true });
   await agent.get('/fetch').expect(200, { hello: 'abc123' });
   // Has CSRF
