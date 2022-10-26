@@ -37,6 +37,9 @@ export function useWebApp<
 
       const sessionConfig = app.locals.config.get('session') as RedisSessionOptions;
       const redis = new Redis(app.locals.config.get('redis'));
+      redis.on('error', (err) => {
+        app.locals.logger.error(err, 'Redis error');
+      });
       sessionMiddleware = createRedisMiddleware({
         ...sessionConfig,
         store: {
@@ -52,8 +55,14 @@ export function useWebApp<
       }
     },
     async stop(app) {
+      app.locals.logger.debug('@gasbuddy/web-app stopping');
       await baseService?.stop?.(app);
-      await app.locals.redis.disconnect();
+      try {
+        await app.locals.redis.quit();
+        app.locals.redis.disconnect();
+      } catch (error) {
+        app.locals.logger.error(error, 'Redis disconnect error');
+      }
     },
     getLogFields(req, values) {
       baseService?.getLogFields?.(req, values);
