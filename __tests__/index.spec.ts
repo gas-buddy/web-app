@@ -2,8 +2,7 @@ import path from 'path';
 import { getReusableApp, request } from '@gasbuddy/service-tester';
 import { useWebApp } from '../src/webapp';
 
-// eslint-disable-next-line global-require
-jest.mock('ioredis', () => require('ioredis-mock'));
+jest.mock('ioredis', () => jest.requireActual('ioredis-mock'));
 
 const TIMEOUT = 500;
 
