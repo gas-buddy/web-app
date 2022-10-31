@@ -1257,35 +1257,35 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gasbuddy/service-tester@npm:^12.0.2":
-  version: 12.0.2
-  resolution: "@gasbuddy/service-tester@npm:12.0.2"
+"@gasbuddy/service-tester@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@gasbuddy/service-tester@npm:12.1.1"
   dependencies:
     "@types/jest": ^29.2.0
     "@types/supertest": ^2.0.12
-    eslint: ^8.25.0
+    eslint: ^8.26.0
     eslint-config-gasbuddy: ^7.0.3
     find-up: ^6.3.0
-    jest: ^29.2.0
-    jest-cli: ^29.2.0
+    jest: ^29.2.2
+    jest-cli: ^29.2.2
     lodash: ^4.17.21
     pino-pretty: ^9.1.1
     read-pkg-up: ^7.0.1
     rest-api-support: ^1.16.1
-    supertest: ^6.3.0
+    supertest: ^6.3.1
     ts-jest: ^29.0.3
     typescript: ^4.8.4
   peerDependencies:
     "@gasbuddy/service": ^12.0.0
   bin:
     gb-jest: build/bin/gb-jest.js
-  checksum: 9c3fe9939d30bd7159e1b03f1a0856cca631428d84c4454836b437a24c69207123fd5718cbc3d13d0ea40d04174d294712e95c46f461a3f972392db62db7d542
+  checksum: 9dc1b49b709f1c0712dba3d620f35db33237db3942f131497fe74180b68197a102b0e8ed66e9229a71d9b2fbe68550770e0e82ae30389d2d5ddf547f5cea9f1d
   languageName: node
   linkType: hard
 
-"@gasbuddy/service@npm:^12.12.4":
-  version: 12.12.4
-  resolution: "@gasbuddy/service@npm:12.12.4"
+"@gasbuddy/service@npm:^12.14.1":
+  version: 12.14.1
+  resolution: "@gasbuddy/service@npm:12.14.1"
   dependencies:
     "@gasbuddy/kms-crypto": ^5.1.2
     "@godaddy/terminus": ^4.11.2
@@ -1318,13 +1318,13 @@ __metadata:
     minimist: ^1.2.7
     pino: ^8.7.0
     read-pkg-up: ^7.0.1
-    rest-api-support: ^1.16.1
+    rest-api-support: ^1.16.2
     shortstop-dns: ^1.1.0
     shortstop-handlers: ^1.1.1
     shortstop-yaml: ^1.0.0
   bin:
     start-service: build/bin/start-service.js
-  checksum: b1a17202d0c49c319fdab534ce76d22d54157b60431abfcd1267ac05d2778fc5653db1be7a9e16b25d73f8842662cd5aa31c2323268d60cde66dbc116fa80bf8
+  checksum: 15b50240cef7e96de7c5f6a6877eae4ca237f9635f0b340c0723ccc5b465c6509760370d88325508d106fb57b7d602d980b5e566dc0b44e39a932123ac3be725
   languageName: node
   linkType: hard
 
@@ -1333,10 +1333,10 @@ __metadata:
   resolution: "@gasbuddy/web-app@workspace:."
   dependencies:
     "@gasbuddy/redis-session": ^3.0.3
-    "@gasbuddy/service": ^12.12.4
-    "@gasbuddy/service-tester": ^12.0.2
+    "@gasbuddy/service": ^12.14.1
+    "@gasbuddy/service-tester": ^12.1.1
     "@types/express-session": ^1.17.5
-    "@types/ioredis-mock": ^5.6.0
+    "@types/ioredis-mock": ^8.2.0
     "@types/jest": ^29.2.0
     eslint: ^8.26.0
     eslint-config-gasbuddy: ^7.0.3
@@ -2410,21 +2410,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ioredis-mock@npm:^5.6.0":
-  version: 5.6.0
-  resolution: "@types/ioredis-mock@npm:5.6.0"
+"@types/ioredis-mock@npm:^8.2.0":
+  version: 8.2.0
+  resolution: "@types/ioredis-mock@npm:8.2.0"
   dependencies:
-    "@types/ioredis": "*"
-  checksum: df430006c5a90d5fe9d23145b37dc324f9d21bc4c8a1763f70b3ff6ca70ea5a8dadb6e5cd1c170e8ddb7669f459b5b0843550da9fdc028419ab2addea84a0c41
-  languageName: node
-  linkType: hard
-
-"@types/ioredis@npm:*":
-  version: 4.28.10
-  resolution: "@types/ioredis@npm:4.28.10"
-  dependencies:
-    "@types/node": "*"
-  checksum: 0f2788cf25f490d3b345db8c5f8b8ce3f6c92cc99abcf744c8f974f02b9b3875233b3d22098614c462a0d6c41c523bd655509418ea88eb6249db6652290ce7cf
+    ioredis: ">=5"
+  checksum: 43509f33d7a3c0fa0e1c0d9775ece04a65a014302147cca0b9b2f1863f98e8a56ade2456a4aab141180a449fc6e9f4015a874f92aaddf03bbd4cbd609184ece0
   languageName: node
   linkType: hard
 
@@ -4249,7 +4240,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.2.0, eslint@npm:^8.25.0, eslint@npm:^8.26.0":
+"eslint@npm:^8.2.0, eslint@npm:^8.26.0":
   version: 8.26.0
   resolution: "eslint@npm:8.26.0"
   dependencies:
@@ -5289,7 +5280,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ioredis@npm:^5.2.3":
+"ioredis@npm:>=5, ioredis@npm:^5.2.3":
   version: 5.2.3
   resolution: "ioredis@npm:5.2.3"
   dependencies:
@@ -5608,7 +5599,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-cli@npm:^29.2.0, jest-cli@npm:^29.2.2":
+"jest-cli@npm:^29.2.2":
   version: 29.2.2
   resolution: "jest-cli@npm:29.2.2"
   dependencies:
@@ -6035,7 +6026,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:^29.2.0, jest@npm:^29.2.2":
+"jest@npm:^29.2.2":
   version: 29.2.2
   resolution: "jest@npm:29.2.2"
   dependencies:
@@ -7777,6 +7768,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rest-api-support@npm:^1.16.2":
+  version: 1.16.2
+  resolution: "rest-api-support@npm:1.16.2"
+  dependencies:
+    query-string: ^7.1.1
+  checksum: 10d39a89940cce2c3a27d79415b5d1e4ff7a0354e976efb0ffc965e96c03883480b724360b10fbf0c30433a7743e1afe2548b542d82c80ac7e21ea010d74779c
+  languageName: node
+  linkType: hard
+
 "restore-cursor@npm:^3.1.0":
   version: 3.1.0
   resolution: "restore-cursor@npm:3.1.0"
@@ -8448,7 +8448,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"supertest@npm:^6.3.0":
+"supertest@npm:^6.3.1":
   version: 6.3.1
   resolution: "supertest@npm:6.3.1"
   dependencies:
