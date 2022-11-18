@@ -58,8 +58,8 @@ export function useWebApp<
       app.locals.logger.debug('@gasbuddy/web-app stopping');
       await baseService?.stop?.(app);
       try {
-        await app.locals.redis?.quit();
-        app.locals.redis?.disconnect();
+        await app.locals.redis?.quit?.();
+        app.locals.redis?.disconnect?.();
       } catch (error) {
         app.locals.logger.error(error, 'Redis disconnect error');
       }
